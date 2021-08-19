@@ -106,5 +106,32 @@ namespace RestApi
                 System.Console.WriteLine(response.ErrorMessage);
             }
         }
+        [TestMethod]
+        public void UpdatePlaylist()
+        {
+            string token = "Bearer BQCDEXtA85NRW4j9jdKMx7XSNJZmb1v6Weo3iW3xkwi2UWiQdH2w35Y-l52o3_CsSjlRETr4SpJbyXruiW3GtPet45IJAOCFzyawDPJQpKJWXM5R0oZBij33wncCr4ckGxlTAbBant_2k8NGy7bbKBnsfhdq2scfXWZ3ciAXCrqKRFacw6ldfhi1Gno-EdGk1gnfDXAHV19n3kczuqrbSn2vV45kgTGSOfs4L-YpJIPTuC6fAOyHD4hyFbQ4LkmNbA3SFMUeR5YsmcAtmWZ1YUVaIuZ_dUJszkEQ6jKB";
+            string getUrl = "https://api.spotify.com/v1/playlists/1VycgeJFTpPqvyfKJNqQph";
+            string jsonBody = "{" +
+                                 "\"name\":\"girish\"," +
+                                 "\"description\": \"favorite songs\"," +
+                                  "\"public\": false" +
+                               "}";
+            client = new RestClient();
+            request = new RestRequest(getUrl);
+            request.AddHeader("Authorization", "Token" + token);
+            request.AddJsonBody(jsonBody);
+            response = client.Put(request);
+            Assert.AreEqual(200, (int)response.StatusCode);
+            if (response.IsSuccessful)
+            {
+                System.Console.WriteLine("test Validated successfully with status code " + response.StatusCode + " with response :" + response.Content);
+
+            }
+            else
+            {
+                System.Console.WriteLine(response.ErrorException);
+                System.Console.WriteLine(response.ErrorMessage);
+            }
+        }
     }
 }
